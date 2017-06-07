@@ -14,7 +14,8 @@
   "plugins": [
     "transform-decorators-legacy",
     "syntax-dynamic-import",
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
+    "transform-class-properties"
     // Enables React code to work with HMR.
   ]
 }

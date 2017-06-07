@@ -16,9 +16,18 @@ export default function createRoutes() {
   return [
     {
       path: '/',
-      name: 'dashboard',
+      name: 'home',
       getComponents(nextState, cb) {
 				import('containers/HomePage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    },
+    {
+      path: '/category',
+      name: 'category',
+      getComponents(nextState, cb) {
+        import('containers/CategoryPage/ListCategory')
           .then(loadModule(cb))
           .catch(errorLoading);
       },

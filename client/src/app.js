@@ -8,8 +8,15 @@ import 'ionicons/css/ionicons.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 
 import App from 'containers/App';
+import categoryStore from 'containers/CategoryPage/ListCategory/categoryStore';
+
+
 
 import createRoutes from './routes';
+
+const store = {
+	categoryStore,
+}
 
 const renderApp = Component => {
 	  // Set up the router, wrapping all Routes in the App component
@@ -20,7 +27,9 @@ const renderApp = Component => {
 
 	render(
 		<AppContainer>
-      <Router history={hashHistory} routes={rootRoute} />
+			<Provider {...store}>
+	      <Router history={hashHistory} routes={rootRoute} />
+			</Provider>
 		</AppContainer>,
 		document.getElementById("root")
 	);

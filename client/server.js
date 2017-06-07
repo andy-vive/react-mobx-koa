@@ -7,6 +7,16 @@ const config = require('./webpack/webpack.config.dev');
 
 const otherConfig = {
   setup: function(app) {
+  	app.get('/api/categories', function(req, res) {
+			res.json([
+				{
+					id: 1,
+					code: 'CA0001',
+					name: 'Category A',
+					description: 'This is category A',
+				},
+			]);
+  	})
   },
   proxy: {
     "/api/**": "http://localhost:8080"

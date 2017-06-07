@@ -1,0 +1,6 @@
+.centerBlock {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    height: 32px;
+}
