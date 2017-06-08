@@ -7,7 +7,10 @@
     "dev:start": "nodemon --ignore build --exec babel-node src",
     "prod:build": "rimraf build && babel src -d build --ignore __test__,.test.js",
     "prod:start": "cross-env NODE_ENV=production pm2 start build --name tblog-server && pm2 logs",
-    "prod:stop": "pm2 delete tblog-server"
+    "prod:stop": "pm2 delete tblog-server",
+    "db:migrate": "sequelize db:migrate",
+    "db:rollback": "sequelize db:migrate:undo",
+    "create:migration": "sequelize migration:create"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -35,7 +38,10 @@
     "koa-router": "^7.2.0",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "pg": "^6.2.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.0.0"
   },
   "license": "MIT"
 }

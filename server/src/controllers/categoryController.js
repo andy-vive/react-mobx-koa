@@ -1,7 +1,9 @@
-
+import model from '../models';
 export const getAllCategories = async(ctx, next) => {
-	 ctx.body = {
+
+	const category = await model.Category.findAll();
+  ctx.body = {
 		success: true,
-		result: [1,2,3],
+		data: category,
 	};
 }
