@@ -1,7 +1,7 @@
 ## Introduction
 
 This project is an example of using react-mobx in client side and koa js in server side with database postgres.
-It's also a e-commerce project. Build a system to manage your products, orders, and customers.
+It's also an e-commerce project. Build a system to manage your products, orders, and customers.
 
 ## Technical
 
