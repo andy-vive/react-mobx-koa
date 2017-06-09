@@ -40,7 +40,7 @@ npm start dev
 
 ## Todo:
 1. Setup server to build and deploy. Apply testing, CICD process.
-2. Implement core future:
+2. Implement core feature:
 - A dashboard where users can view overrall their business. Using chart...
 - Manage categorys, products, and orders.
 - Report system.
