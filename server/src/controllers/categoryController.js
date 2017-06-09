@@ -8,7 +8,7 @@ export const getAllCategories = async (ctx, next) => {
 	const categories = await model.Category.findAll();
   ctx.body = {
 		success: true,
-		data: categories,
+		result: categories,
 	};
 };
 
@@ -21,7 +21,7 @@ export const findCategoryByCode = async (ctx, next) => {
 
 	ctx.body = {
 		success: true,
-		data: category,
+		result: category,
 	}
 }; 
 

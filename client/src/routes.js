@@ -24,10 +24,19 @@ export default function createRoutes() {
       },
     },
     {
-      path: '/category',
+      path: '/categories',
       name: 'category',
       getComponents(nextState, cb) {
         import('containers/CategoryPage/ListCategory')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    },
+    {
+      path: '/categories/:code',
+      name: 'category-detail',
+      getComponents(nextState, cb) {
+        import('containers/CategoryPage/CategoryDetail')
           .then(loadModule(cb))
           .catch(errorLoading);
       },

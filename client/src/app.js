@@ -9,6 +9,7 @@ import 'font-awesome/css/font-awesome.min.css';
 
 import App from 'containers/App';
 import categoryStore from 'containers/CategoryPage/ListCategory/categoryStore';
+import categoryDetailStore from 'containers/CategoryPage/CategoryDetail/categoryDetailStore';
 
 
 
@@ -16,7 +17,8 @@ import createRoutes from './routes';
 
 const store = {
 	categoryStore,
-}
+	categoryDetailStore,
+};
 
 const renderApp = Component => {
 	  // Set up the router, wrapping all Routes in the App component

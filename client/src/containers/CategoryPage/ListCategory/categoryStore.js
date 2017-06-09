@@ -6,7 +6,6 @@ class CategoryStore {
 	@observable failure;
 	
 	constructor() {
-		autorun(() => this.categories.forEach((o) => console.log(o.name)));
 	}
 
 	@action setCategories = (categories) => {
