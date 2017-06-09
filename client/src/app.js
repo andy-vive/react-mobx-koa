@@ -9,7 +9,6 @@ import 'font-awesome/css/font-awesome.min.css';
 
 import App from 'containers/App';
 import categoryStore from 'containers/CategoryPage/ListCategory/categoryStore';
-import categoryDetailStore from 'containers/CategoryPage/CategoryDetail/categoryDetailStore';
 import categoryForm from 'containers/CategoryPage/DetailForm/formStore';
 
 
@@ -18,11 +17,10 @@ import createRoutes from './routes';
 
 const store = {
 	categoryStore,
-	categoryDetailStore,
 	categoryForm,
 };
 
-const renderApp = Component => {
+const renderApp = () => {
 	  // Set up the router, wrapping all Routes in the App component
   const rootRoute = {
     component: App,
@@ -39,7 +37,7 @@ const renderApp = Component => {
 	);
 };
 
-renderApp(<div>aaaa</div>);
+renderApp();
 
 if (module.hot) {
 	module.hot.accept(() => renderApp(App));

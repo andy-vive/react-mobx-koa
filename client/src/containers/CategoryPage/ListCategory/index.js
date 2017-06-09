@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
+import { Link } from 'react-router';
 import ContentWrapper from 'components/ContentWrapper';
-
 import { getAllCategories } from './actions';
 import CategoryItem from './CategoryItem';
 @inject('categoryStore')
@@ -25,8 +25,23 @@ class ListCategory extends Component {
 			));
 		return (
 			<ContentWrapper>
+				<section className="content-header">
+					<h1>Category Page</h1>
+				</section>
 		    <section className="content">
-					{ categoryComps }	
+		    	<div className="">
+		    		<div className="btn-group">
+		    			<Link 
+		    				to="/categories/new"
+	    					className="btn btn-success"
+	    				>
+	    					Create New Category
+    					</Link>
+		    		</div>
+		    	</div>
+					<div className="">
+						{ categoryComps }	
+					</div>
     		</section>
     		
 			</ContentWrapper>

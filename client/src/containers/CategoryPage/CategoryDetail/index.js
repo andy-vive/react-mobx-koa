@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
 import ContentWrapper from 'components/ContentWrapper';
+import { mode } from 'components/FormMobx';
 import { getCategory, updateCategory } from './actions';
 
 import DetailForm from '../DetailForm';
@@ -20,11 +21,14 @@ class CategoryDetail extends Component {
 	}
 
 	render() {
-		const { categoryDetailStore } = this.props;
+		const { code } = this.props.params;
 		return (
 			<ContentWrapper>
 				<section className="content">
-					<DetailForm />
+					<DetailForm 
+						mode={mode.EDIT}
+						onSubmit={(data) => updateCategory({...data, code})}
+					/>
 				</section>
 			</ContentWrapper>
 		)

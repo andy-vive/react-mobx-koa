@@ -24,7 +24,7 @@ const otherConfig = {
 };
 
 new WebpackDevServer(webpack(config), _.assign({}, config.devServer, otherConfig))
-.listen(9000, 'localhost', function (err) {
+.listen(3000, 'localhost', function (err) {
   if (err) {
     console.log(err);
   }

@@ -1,4 +1,5 @@
-const fields = [{
+const fields = [
+	{
   name: 'name',
   label: 'Category Name',
   placeholder: 'Category Name',

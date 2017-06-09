@@ -1,5 +1,7 @@
 import React from 'react';
-
+import Header from 'components/Header';
+import SideBar from 'components/SideBar';
+import './style.less';
 class ContentWrapper extends React.Component {
 
   componentDidMount() {
@@ -8,8 +10,12 @@ class ContentWrapper extends React.Component {
 
   render() {
     return (
-      <div className="content-wrapper">
-        { React.Children.toArray(this.props.children) }
+      <div>
+        <SideBar />
+        <div className="content-wrapper">
+          <Header />
+            { React.Children.toArray(this.props.children) }
+          </div>
       </div>
     );
   }

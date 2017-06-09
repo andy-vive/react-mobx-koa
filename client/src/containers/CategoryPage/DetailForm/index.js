@@ -1,20 +1,18 @@
 import React from 'react';
-import FormEdit, {ItemEdit, Column} from 'components/FormMobx';
+import FormEdit, {ItemEdit, Column, mode} from 'components/FormMobx';
 import { observer, inject } from 'mobx-react';
 
 @inject("categoryForm")
 @observer
-export default class extends React.Component {
+export default class CategoryForm extends React.Component {
 	render() {
-		const { categoryForm } = this.props;
+		const { categoryForm, onSubmit, mode } = this.props;
 		return (
 			<FormEdit
-				edit
+				mode={mode}
 				title="Category Infomation"
 				form={categoryForm}
-				onSubmit={(data) => {
-					console.log(data)
-				}}
+				onSubmit={onSubmit}
 			>
 				<Column>
 					<ItemEdit
@@ -24,13 +22,20 @@ export default class extends React.Component {
 						field={categoryForm.$('description')}
 					/>
 					<ItemEdit
+						type="number"
 						field={categoryForm.$('priceTypeI')}
 					/>
 					<ItemEdit
-						field={categoryForm.$('priceTypeI')}
+						type="number"
+						field={categoryForm.$('priceTypeII')}
 					/>
 				</Column>
 			</FormEdit>
 		);		
 	}
+};
+
+CategoryForm.defaultProps = {
+	onSubmit: () => {},
+	mode: mode.VIEW,
 };

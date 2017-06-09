@@ -33,6 +33,15 @@ export default function createRoutes() {
       },
     },
     {
+      path: '/categories/new',
+      name: 'category-new',
+      getComponents(nextState, cb) {
+        import('containers/CategoryPage/CreateCategory')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    },
+    {
       path: '/categories/:code',
       name: 'category-detail',
       getComponents(nextState, cb) {

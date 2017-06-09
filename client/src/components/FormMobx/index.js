@@ -17,7 +17,7 @@ export default class FormEdit extends React.Component {
   }
 
   render() {
-    const { form } = this.props;
+    const { form, } = this.props;
     const EditBtn = (
       <span className="edit-btn"
         style={{ cursor: 'pointer' }}
@@ -29,42 +29,76 @@ export default class FormEdit extends React.Component {
     );
     const childrenWithProps = React.Children.map(this.props.children,
       (child) => React.cloneElement(child, {
-        editing: this.state.isEditing,
+        editing: this.state.isEditing || this.props.mode === mode.CREATE,
         form,
       })
     );
+    const renderButton = () => {
+      if(this.props.mode === mode.CREATE) {
+          return (
+            <div>
+              <button
+                type="submit"
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.props.onSubmit(form.values());
+                }}
+                className="btn btn-success"
+              >
+                Create
+              </button>
+              <button
+                onClick={() => {
+                  window.location.href='/#/categories'
+                }}
+                className="btn btn-default"
+              >
+                Cancel
+              </button>              
+            </div>
+          );
+      } else if (this.props.mode === mode.EDIT && this.state.isEditing) {
+          return (
+            <div>
+              <button
+                type="submit"
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.setState({ isEditing: false, })
+                  this.props.onSubmit(form.values());
+                }}
+                className="btn btn-success"
+              >
+                Update
+              </button>
+              <button
+                onClick={() => {
+                  this.setState({ isEditing: false, })
+                }}
+                className="btn btn-default"
+              >
+                Cancel
+              </button>              
+            </div>
+            );
+      } else {
+       return (
+          <span />
+        );       
+      }
+    }
 
     return (
       <Box
         title={this.props.title}
-        headerButton={ this.state.isEditing && !this.props.edit ? undefined : EditBtn }
+        headerButton={ this.state.isEditing && this.props.mode === mode.EDIT ? undefined : EditBtn }
       >
         <form>
           { childrenWithProps }
           <p>{form.error}</p>
-
-        {
-          this.state.isEditing ?
-            <div className="col-xs-12 body-footer">
-              <button
-                type="submit"
-                onClick={() => {
-                  this.setState({isEditing: false,});
-                  this.props.onSubmit(form.values());
-                }}
-                className="btn btn-primary"
-              >
-                Save
-              </button>
-              <button
-                onClick={() => this.setState({isEditing: false,})}
-                className="btn btn-default"
-              >
-                Cancel
-              </button>
-            </div>
-            : <span />
-        }
+          <div className="col-xs-12 body-footer">
+            { renderButton() }
+          </div>
         </form>
       </Box>
     )
@@ -97,8 +131,14 @@ export const ItemEdit = observer(({ field, type = 'text', placeholder = null, ed
              {...field.bind({ type, placeholder })}
           /> 
           :
-          <span className={`value-text`}> {field.label}</span>
+          <span className={`value-text`}> {field.value}</span>
       }
     </FormGroup>
   </div>
 ));
+
+export const mode = {
+  CREATE: 'CREATE',
+  EDIT: 'EDIT',
+  VIEW: 'VIEW',
+};
