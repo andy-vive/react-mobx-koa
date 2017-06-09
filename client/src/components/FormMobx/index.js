@@ -48,8 +48,9 @@ export default class FormEdit extends React.Component {
                 Create
               </button>
               <button
-                onClick={() => {
-                  window.location.href='/#/categories'
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.history.back();
                 }}
                 className="btn btn-default"
               >
@@ -91,7 +92,7 @@ export default class FormEdit extends React.Component {
     return (
       <Box
         title={this.props.title}
-        headerButton={ this.state.isEditing && this.props.mode === mode.EDIT ? undefined : EditBtn }
+        headerButton={ this.props.mode === mode.EDIT ? EditBtn : undefined  }
       >
         <form>
           { childrenWithProps }

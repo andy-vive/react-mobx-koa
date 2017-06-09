@@ -1,5 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
+import  formStore from '../DetailForm/formStore';
 import { apiRest as categoryRest } from '../apiRest';
 
 export const addNewCategory = (category) => {
@@ -11,9 +12,13 @@ export const addNewCategory = (category) => {
 		category,
 	})
 	.then((res) => {
-		console.info();
+		if (res.data) {
+			formStore.reset();
+			alert('Create success');			
+		}
 	})
 	.catch((err) => {
 		throw err;
 	});
-};
+}
+	

@@ -3,7 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "dependencies": {
-    "sequelize": "^4.0.0"
-  }
+  "scripts": {
+    "start": "nps"
+  },
+  "devDependencies": {
+    "nps": "^5.1.0",
+    "nps-utils": "^1.2.0"
+  },
+  "engines": {
+    "node": "7.x",
+    "yarn": "0.20.3"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules",
+    "server/node_modules"
+  ]
 }
