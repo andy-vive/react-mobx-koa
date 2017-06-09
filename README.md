@@ -36,6 +36,8 @@ npm start dev
 ```
 
 ## Doing
+- Apply prop types
+- Fix eslint
 - Re-design UI for this project, apply service workers. I always think, a PWA is better than a mobile app.
 
 ## Todo:
