@@ -1,38 +1,35 @@
 import React from 'react';
-import FormEdit, {ItemEdit, Column} from 'components/FormEdit';
-import { observer } from 'mobx-react';
+import FormEdit, {ItemEdit, Column} from 'components/FormMobx';
+import { observer, inject } from 'mobx-react';
+
+@inject("categoryForm")
 @observer
 export default class extends React.Component {
 	render() {
-		const { code, name, description, priceTypeI, priceTypeII } = this.props.details;
+		const { categoryForm } = this.props;
 		return (
 			<FormEdit
-				title="Category Details"
-				edit={false}
-				onSave={() => {}}
+				edit
+				title="Category Infomation"
+				form={categoryForm}
+				onSubmit={(data) => {
+					console.log(data)
+				}}
 			>
 				<Column>
-	        <ItemEdit
-	          title={'Category Code'}
-	          value={code}
-	        />
-	        <ItemEdit
-	          title={'Category Name'}
-	          value={name}
-	        />
-	        <ItemEdit
-	          title={'Description'}
-	          value={description}
-	        />
-	        <ItemEdit
-	          title={'Price Type I'}
-	          value={priceTypeI}
-	        />
-	        <ItemEdit
-	          title={'Price Type II'}
-	          value={priceTypeII}
-	        />
-	      </Column>
+					<ItemEdit
+						field={categoryForm.$('name')}
+					/>
+					<ItemEdit
+						field={categoryForm.$('description')}
+					/>
+					<ItemEdit
+						field={categoryForm.$('priceTypeI')}
+					/>
+					<ItemEdit
+						field={categoryForm.$('priceTypeI')}
+					/>
+				</Column>
 			</FormEdit>
 		);		
 	}

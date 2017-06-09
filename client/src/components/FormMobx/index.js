@@ -1,7 +1,13 @@
+/*
+* This component is combined with FormMobx
+* What 's I coding????'
+*/
 import React from 'react';
+import { observer } from 'mobx-react';
 import Box from 'components/Box';
 import FormGroup from 'components/FormGroup';
 
+@observer
 export default class FormEdit extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +17,7 @@ export default class FormEdit extends React.Component {
   }
 
   render() {
+    const { form } = this.props;
     const EditBtn = (
       <span className="edit-btn"
         style={{ cursor: 'pointer' }}
@@ -23,22 +30,27 @@ export default class FormEdit extends React.Component {
     const childrenWithProps = React.Children.map(this.props.children,
       (child) => React.cloneElement(child, {
         editing: this.state.isEditing,
+        form,
       })
     );
 
     return (
       <Box
         title={this.props.title}
-        headerButton={ this.state.isEditing && this.props.edit ? EditBtn : undefined }
+        headerButton={ this.state.isEditing && !this.props.edit ? undefined : EditBtn }
       >
-        { childrenWithProps }
+        <form>
+          { childrenWithProps }
+          <p>{form.error}</p>
+
         {
           this.state.isEditing ?
             <div className="col-xs-12 body-footer">
               <button
+                type="submit"
                 onClick={() => {
                   this.setState({isEditing: false,});
-                  this.props.onSave();
+                  this.props.onSubmit(form.values());
                 }}
                 className="btn btn-primary"
               >
@@ -53,13 +65,13 @@ export default class FormEdit extends React.Component {
             </div>
             : <span />
         }
-
+        </form>
       </Box>
     )
   }
 }
 
-export const Column = ({ col = 6, editing, children }) => {
+export const Column = observer(({ col = 6, editing, children }) => {
   const childrenWithProps = React.Children.map(children,
     (child) => React.cloneElement(child, {
       editing,
@@ -71,19 +83,22 @@ export const Column = ({ col = 6, editing, children }) => {
      { childrenWithProps }
     </div>
   )
-};
+});
 
 
 // TODO:
 // Make Item edit workable with select, radio button, or checkbox
-export const ItemEdit = ({ editing, title, value }) =>
-  (
-    <div className="col-md-12">
-      <FormGroup title={title}>
-        {
-          editing ? <input type="text" className="form-control" value={value}/> :
-            <span className={`${title == 'SID' ? 'bold' : ''} value-text`}>{value}</span>
-        }
-      </FormGroup>
-    </div>
-  );
+export const ItemEdit = observer(({ field, type = 'text', placeholder = null, editing }) => (
+  <div className="col-md-12">
+    <FormGroup title={field.label}>
+      {
+        editing ? 
+          <input className="form-control"
+             {...field.bind({ type, placeholder })}
+          /> 
+          :
+          <span className={`value-text`}> {field.label}</span>
+      }
+    </FormGroup>
+  </div>
+));

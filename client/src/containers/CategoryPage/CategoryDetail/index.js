@@ -7,8 +7,6 @@ import { getCategory, updateCategory } from './actions';
 import DetailForm from '../DetailForm';
 
 
-@inject('categoryDetailStore')
-@observer
 class CategoryDetail extends Component {
 	constructor(props) {
 		super(props);
@@ -26,9 +24,7 @@ class CategoryDetail extends Component {
 		return (
 			<ContentWrapper>
 				<section className="content">
-					<DetailForm 
-						details={categoryDetailStore}
-					/>
+					<DetailForm />
 				</section>
 			</ContentWrapper>
 		)
