@@ -1,5 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
+import { ToastSuccess, ToastDanger } from 'react-toastr-basic';
 import  formStore from '../DetailForm/formStore';
 import { apiRest as categoryRest } from '../apiRest';
 
@@ -36,9 +37,11 @@ export const updateCategory = (category) => {
 			formStore.set('value',{
 				...result
 			});
+			ToastSuccess('Update category successfully');
 		}
 	})
 	.catch((err) => {
+		ToastDanger('Update category failure');
 		throw err;
 	});
 };
