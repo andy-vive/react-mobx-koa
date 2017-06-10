@@ -8,10 +8,13 @@ export default class App extends Component {
 		super(props);
 	}
 	render() {
+		const { name = '' }=this.props.children.props.route;
 		return (
 				<div className="wrapper">
 			    <ToastrContainer/>
-					<Header />
+					<Header 
+						route={name}
+					/>
 					<SideBar />
 			    { React.Children.toArray(this.props.children) }
 				</div>	

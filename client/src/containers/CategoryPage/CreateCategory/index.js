@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FadeTransition } from 'components/RouteTransition';
+import { SlideLeftTransition } from 'components/RouteTransition';
 import { mode } from 'components/FormMobx';
 import { addNewCategory } from './actions';
 import DetailForm from '../DetailForm';
@@ -11,7 +11,7 @@ class CreateCategory extends Component {
 	}
 	render() {
 		return (
-			<FadeTransition
+			<SlideLeftTransition
 				pathname="CreateCategory"
 			>
 				<section className="content">
@@ -20,7 +20,7 @@ class CreateCategory extends Component {
 						onSubmit={addNewCategory}
 					/>
 				</section>
-			</FadeTransition>
+			</SlideLeftTransition>
 		);
 	}
 };

@@ -3,6 +3,8 @@
  * @see http://mxstbr.blog/2016/01/react-apps-with-pages/
  */
 
+import { ROUTES } from 'utils/routes';
+
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
 };
@@ -16,7 +18,7 @@ export default function createRoutes() {
   return [
     {
       path: '/',
-      name: 'home',
+      name: ROUTES.DASHBOARD,
       getComponents(nextState, cb) {
 				import('containers/HomePage')
           .then(loadModule(cb))
@@ -25,7 +27,7 @@ export default function createRoutes() {
     },
     {
       path: '/categories',
-      name: 'category',
+      name: ROUTES.LIST_CATEGORY,
       getComponents(nextState, cb) {
         import('containers/CategoryPage/ListCategory')
           .then(loadModule(cb))
@@ -34,7 +36,7 @@ export default function createRoutes() {
     },
     {
       path: '/categories/new',
-      name: 'category-new',
+      name: ROUTES.CREATE_CATEGORY,
       getComponents(nextState, cb) {
         import('containers/CategoryPage/CreateCategory')
           .then(loadModule(cb))
@@ -43,7 +45,7 @@ export default function createRoutes() {
     },
     {
       path: '/categories/:code',
-      name: 'category-detail',
+      name: ROUTES.VIEW_CATEGORY,
       getComponents(nextState, cb) {
         import('containers/CategoryPage/CategoryDetail')
           .then(loadModule(cb))
@@ -52,7 +54,7 @@ export default function createRoutes() {
     },
     {
       path: '*',
-      name: 'notFound',
+      name: ROUTES.NOT_FOUND,
       getComponents(nextState, cb) {
         import('containers/NotFoundPage')
           .then(loadModule(cb))
