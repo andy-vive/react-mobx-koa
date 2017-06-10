@@ -22,5 +22,8 @@ export const addNewCategory = (category) => {
 		ToastDanger('Error occurs when creating....');
 		throw err;
 	});
+};
+
+export const resetForm = () => {
+	formStore.reset();
 }
-	

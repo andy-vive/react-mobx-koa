@@ -10,6 +10,7 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.toggle = null;
+    this.open = false;
   }
 
   shouldShowBackBtn(route) {
@@ -46,6 +47,7 @@ class Header extends React.Component {
           </div>
           <div className="hamburger">
             <HamburgerIcon
+              open={this.open}
               back={this.shouldShowBackBtn(this.props.route)} 
               onClick={this.click}
             />

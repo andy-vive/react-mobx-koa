@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { SlideLeftTransition } from 'components/RouteTransition';
 import { mode } from 'components/FormMobx';
-import { addNewCategory } from './actions';
+import { addNewCategory, resetForm } from './actions';
 import DetailForm from '../DetailForm';
 
 
 class CreateCategory extends Component {
 	constructor(props) {
 		super(props);
+	}
+	componentDidMount() {
+		resetForm();
 	}
 	render() {
 		return (
