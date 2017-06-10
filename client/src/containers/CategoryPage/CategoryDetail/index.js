@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-
-import ContentWrapper from 'components/ContentWrapper';
+import { SlideLeftTransition } from 'components/RouteTransition';
 import { mode } from 'components/FormMobx';
 import { getCategory, updateCategory } from './actions';
 
@@ -23,14 +22,16 @@ class CategoryDetail extends Component {
 	render() {
 		const { code } = this.props.params;
 		return (
-			<ContentWrapper>
+			<SlideLeftTransition
+				pathname="CategoryDetail"
+			>
 				<section className="content">
 					<DetailForm 
 						mode={mode.EDIT}
 						onSubmit={(data) => updateCategory({...data, code})}
 					/>
 				</section>
-			</ContentWrapper>
+			</SlideLeftTransition>
 		)
 	}
 }

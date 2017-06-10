@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ContentWrapper from 'components/ContentWrapper';
+import { FadeTransition } from 'components/RouteTransition';
 import { mode } from 'components/FormMobx';
 import { addNewCategory } from './actions';
 import DetailForm from '../DetailForm';
@@ -11,16 +11,18 @@ class CreateCategory extends Component {
 	}
 	render() {
 		return (
-			<ContentWrapper>
+			<FadeTransition
+				pathname="CreateCategory"
+			>
 				<section className="content">
 					<DetailForm
 						mode={mode.CREATE}
 						onSubmit={addNewCategory}
 					/>
 				</section>
-			</ContentWrapper>
-		)
+			</FadeTransition>
+		);
 	}
-}
+};
 
 export default CreateCategory;

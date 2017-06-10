@@ -9,14 +9,12 @@ export default class App extends Component {
 	}
 	render() {
 		return (
-			<div>
-		    <ToastrContainer/>
-			<div className="wrapper">
-				<Header />
-				<SideBar />
-		    { React.Children.toArray(this.props.children) }
-			</div>	
-			</div>
+				<div className="wrapper">
+			    <ToastrContainer/>
+					<Header />
+					<SideBar />
+			    { React.Children.toArray(this.props.children) }
+				</div>	
 		);
 	}
 };
