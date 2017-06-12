@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { Link } from 'react-router';
 import { FadeTransition } from 'components/RouteTransition';
 import { getAllCategories } from './actions';
-import CategoryItem from './CategoryItem';
+import CategoryItems from './CategoryItems';
 @inject('categoryStore')
 @observer
 class ListCategory extends Component {
@@ -17,12 +17,6 @@ class ListCategory extends Component {
 
 	render() {
 		const { categories } = this.props.categoryStore;
-		const categoryComps = categories.map((o) => (
-			<CategoryItem 
-				key={o.id}
-				category={{...o}}
-			/>
-			));
 		return (
 			<FadeTransition
 				pathname="ListCategory"
@@ -41,8 +35,10 @@ class ListCategory extends Component {
     					</Link>
 		    		</div>
 		    	</div>
-					<div className="">
-						{ categoryComps }	
+					<div>
+						<CategoryItems 
+							categories={categories}
+						/>
 					</div>
     		</section>
     		

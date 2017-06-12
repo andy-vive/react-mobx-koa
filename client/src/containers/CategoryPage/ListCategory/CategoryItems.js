@@ -1,9 +1,32 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 import { Link } from 'react-router';
 import Card, { CardHeader, CardBody } from 'components/Card';
 import FormGroup from 'components/FormGroup';
 
-export default ({ category, onClick }) => (
+/*
+* This component is only showed general information. It's diffrent with DetailItem in DetailForm component
+*/
+
+@observer
+export default class extends React.Component {
+	render() {
+		const { categories =[] } = this.props;
+		return (
+			<div>
+				{ categories.map((category) => (
+						<CategoryItem
+							key={category.code}
+							category={category}
+						/>
+					))
+				}
+			</div>
+		);
+	}
+}
+
+const CategoryItem = ({ category }) => (
 	<Card>
 		<CardHeader>
 			<Link to={`/categories/${category.code}`}>
