@@ -28,6 +28,7 @@
     "react-router-redux": "^4.0.8",
     "react-router-transition": "^0.1.1",
     "react-toastr-basic": "^1.1.14",
+    "react-widgets": "^3.4.8",
     "rfx-core": "^1.5.3",
     "validatorjs": "^3.13.3",
     "warning": "^3.0.0"

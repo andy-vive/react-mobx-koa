@@ -1,5 +1,6 @@
 import React from 'react';
-import FormEdit, {ItemEdit, Column, mode} from 'components/FormMobx';
+import FormEdit, {ItemEdit, Column } from 'components/FormMobx';
+import { mode, itemType } from 'components/FormMobx/utils';
 import { observer, inject } from 'mobx-react';
 
 @inject("productForm")
@@ -20,6 +21,13 @@ export default class ProductForm extends React.Component {
 					/>
 					<ItemEdit
 						field={productForm.$('basePrice')}
+					/>
+					<ItemEdit
+						field={productForm.$('quantity')}
+					/>
+					<ItemEdit
+						type={itemType.DROPDOWNLIST}
+						field={productForm.$('unit')}
 					/>
 				</Column>
 			</FormEdit>

@@ -5,8 +5,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import Box from 'components/Box';
-import FormGroup from 'components/FormGroup';
-
+import { mode } from './utils';
 @observer
 export default class FormEdit extends React.Component {
   constructor(props) {
@@ -120,26 +119,5 @@ export const Column = observer(({ col = 6, editing, children }) => {
   )
 });
 
+export ItemEdit from './ItemEdit';
 
-// TODO:
-// Make Item edit workable with select, radio button, or checkbox
-export const ItemEdit = observer(({ field, type = 'text', placeholder = null, editing }) => (
-  <div className="col-md-12">
-    <FormGroup title={field.label}>
-      {
-        editing ? 
-          <input className="form-control"
-             {...field.bind({ type, placeholder })}
-          /> 
-          :
-          <span className={`value-text`}> {field.value}</span>
-      }
-    </FormGroup>
-  </div>
-));
-
-export const mode = {
-  CREATE: 'CREATE',
-  EDIT: 'EDIT',
-  VIEW: 'VIEW',
-};

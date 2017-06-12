@@ -1,5 +1,6 @@
 import React from 'react';
-import FormEdit, {ItemEdit, Column, mode} from 'components/FormMobx';
+import FormEdit, {ItemEdit, Column } from 'components/FormMobx';
+import { mode, itemType } from 'components/FormMobx/utils';
 import { observer, inject } from 'mobx-react';
 
 @inject("categoryForm")
@@ -22,11 +23,11 @@ export default class CategoryForm extends React.Component {
 						field={categoryForm.$('description')}
 					/>
 					<ItemEdit
-						type="number"
+						type={itemType.NUMBER}
 						field={categoryForm.$('priceTypeI')}
 					/>
 					<ItemEdit
-						type="number"
+						type={itemType.NUMBER}
 						field={categoryForm.$('priceTypeII')}
 					/>
 				</Column>

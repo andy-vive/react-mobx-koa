@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { SlideLeftTransition } from 'components/RouteTransition';
 import PageHeader from 'components/PageHeader';
-import { mode } from 'components/FormMobx';
+import { mode } from 'components/FormMobx/utils';
 import ProductForm from '../ProductForm';
 
 @observer

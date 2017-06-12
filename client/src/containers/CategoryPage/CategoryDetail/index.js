@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { SlideLeftTransition } from 'components/RouteTransition';
-import { mode } from 'components/FormMobx';
+import { mode } from 'components/FormMobx/utils';
 
 import { getCategory, updateCategory } from '../DetailForm/actions';
 import DetailForm from '../DetailForm';
