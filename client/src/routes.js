@@ -53,6 +53,24 @@ export default function createRoutes() {
       },
     },
     {
+      path: '/categories/:code/new-products',
+      name: ROUTES.CREATE_PRODUCT,
+      getComponents(nextState, cb) {
+        import('containers/ProductPage/CreateProduct')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    },
+    {
+      path: '/products/news',
+      name: ROUTES.CREATE_PRODUCT,
+      getComponents(nextState, cb) {
+        import('containers/ProductPage/CreateProduct')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    },
+    {
       path: '*',
       name: ROUTES.NOT_FOUND,
       getComponents(nextState, cb) {
@@ -61,6 +79,6 @@ export default function createRoutes() {
           .catch(errorLoading);
       },
     },
-
+    
   ];
 }

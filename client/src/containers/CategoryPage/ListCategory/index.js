@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Link } from 'react-router';
 import { FadeTransition } from 'components/RouteTransition';
+import PageHeader from 'components/PageHeader';
 import { getAllCategories } from './actions';
 import CategoryItems from './CategoryItems';
 @inject('categoryStore')
@@ -21,9 +22,9 @@ class ListCategory extends Component {
 			<FadeTransition
 				pathname="ListCategory"
 			>
-				<section className="content-header">
-					<h1>Category Page</h1>
-				</section>
+				<PageHeader
+					title="List Category"
+				/>
 		    <section className="content">
 		    	<div className="">
 		    		<div className="btn-group">

@@ -17,6 +17,8 @@ class Header extends React.Component {
     switch (route) {
       case ROUTES.VIEW_CATEGORY:
       case ROUTES.CREATE_CATEGORY:
+      case ROUTES.CREATE_PRODUCT:
+      case ROUTES.VIEW_PRODUCT:
         return true;
       default: 
         return false;

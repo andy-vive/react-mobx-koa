@@ -8,17 +8,9 @@ import 'ionicons/css/ionicons.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 
 import App from 'containers/App';
-import categoryStore from 'containers/CategoryPage/ListCategory/categoryStore';
-import categoryForm from 'containers/CategoryPage/DetailForm/formStore';
-
-
 
 import createRoutes from './routes';
-
-const store = {
-	categoryStore,
-	categoryForm,
-};
+import stores from './stores';
 
 const renderApp = () => {
 	  // Set up the router, wrapping all Routes in the App component
@@ -29,7 +21,7 @@ const renderApp = () => {
 
 	render(
 		<AppContainer>
-			<Provider {...store}>
+			<Provider {...stores}>
 	      <Router history={hashHistory} routes={rootRoute} />
 			</Provider>
 		</AppContainer>,

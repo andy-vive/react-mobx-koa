@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { SlideLeftTransition } from 'components/RouteTransition';
 import { mode } from 'components/FormMobx';
-import { addNewCategory, resetForm } from './actions';
+
+import { addNewCategory, resetForm } from '../DetailForm/actions';
 import DetailForm from '../DetailForm';
 
 

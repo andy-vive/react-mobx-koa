@@ -29,9 +29,19 @@ export default class extends React.Component {
 const CategoryItem = ({ category }) => (
 	<Card>
 		<CardHeader>
-			<Link to={`/categories/${category.code}`}>
+			<Link to={`/categories/${category.code}`}
+				style={{ float: 'left' }}
+			>
 				<h4>{category.code}</h4>
 			</Link>
+			<div className="btn-group pull-right">
+				<Link 
+					to={`/categories/${category.code}/new-products`}
+					className="btn btn-success"
+				>
+					Add more products
+				</Link>
+			</div>
 		</CardHeader>
 		<CardBody>
 			<FormGroup
