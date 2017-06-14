@@ -1,15 +1,13 @@
-import { generateCode } from '../utils';
-import model from '../models';
+import { generateCode } from 'utils';
+import { success, failure } from 'utils/response';
+import model from 'models';
 
 const CATEGORY_CODE_LENGTH = 4;
 const CATEGORY_PREFIX_CODE = 'CA';
 
 export const getAllCategories = async (ctx, next) => {
 	const categories = await model.Category.findAll();
-  ctx.body = {
-		success: true,
-		result: categories,
-	};
+  ctx.body = success(categories);
 };
 
 export const findCategoryByCode = async (ctx, next) => {
@@ -19,10 +17,7 @@ export const findCategoryByCode = async (ctx, next) => {
 		},
 	});
 
-	ctx.body = {
-		success: true,
-		result: category,
-	}
+	ctx.body = success(category);
 }; 
 
 export const addNewCategory = async (ctx, next) => {
@@ -38,7 +33,7 @@ export const addNewCategory = async (ctx, next) => {
 	category.code = newCode;
 	category = await category.save();
 
-	ctx.body = category;
+	ctx.body = success(category);
 };
 
 export const editCategory = async (ctx, next) => {
@@ -49,7 +44,10 @@ export const editCategory = async (ctx, next) => {
 	});
 
 	if (!category) {
-		ctx.throw(`Can not found category with code: ${ctx.params.code}`, 500);
+		ctx.body = failure({
+			message: `Can not found category with code: ${ctx.params.code}`,
+		});
+		return;
 	}
 
 	const request = ctx.request.body.category;
@@ -58,5 +56,5 @@ export const editCategory = async (ctx, next) => {
 	category.description = request.description;
 	category = await category.save();
 
-	ctx.body = category;
-}
+	ctx.body = success(category);
+};

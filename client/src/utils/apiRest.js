@@ -5,7 +5,8 @@ export const categoryApi = {
 	short: `${categoryUri}/short`,
 };
 
-const productApi = '/api/products';
+const productUri = '/api/products';
 export const productApi = {
-	root: productApi,
+	root: productUri,
 };
+

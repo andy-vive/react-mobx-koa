@@ -1,6 +1,6 @@
-import Sequelize from 'sequelize';
-import { generateCode } from '../utils';
-import model from '../models';
+import { success, failure } from 'utils/response';
+import { generateCode } from 'utils';
+import model from 'models';
 
 const PRODUCT_CODE_LENGTH = 4;
 const PRODUCT_PREFIX_CODE = 'SP';
@@ -15,17 +15,13 @@ export const getProductsByCategory = async (ctx, next) => {
 		}],
 	});
 	
-  ctx.body = {
-		success: true,
-		result: products,
-	};
+  ctx.body = success(products);
 }
 
 export const createProduct = async (ctx, next) => {
 	let { product, categoryCode } = ctx.request.body;
 	
-	if (!category || !categoryCode) {
-		return;
+	if (!product || !categoryCode) {
 	}
 	// Find Category
 	const category = await model.Category.findOne({
@@ -35,13 +31,9 @@ export const createProduct = async (ctx, next) => {
 	});
 
 	if (!category) {
-	  ctx.body = {
-			success: false,
-			result: null,
-			error: {
+	  ctx.body = failure({
 				message: `Can not found category with code: ${categoryCode}`,
-			},
-		};
+		});
 		return;
 	}
 
@@ -52,8 +44,29 @@ export const createProduct = async (ctx, next) => {
 	product.code = newCode;
 	product = await product.save();
 
-	ctx.body = {
-		success: true,
-		result: product,
-	};
+	ctx.body = success(product);
 };
+
+export const editProduct = async (ctx, next) => {
+	let product = await model.Product.findOne({
+		where: {
+			code: ctx.params.code,
+		},
+	});
+
+	if (!product) {
+		failure({
+			message: `Can not found product with code: ${ctx.params.code}`,
+		});
+		return;
+	}
+
+	const request = ctx.request.body.product;
+
+	product.basePrice = request.basePrice;
+	product.quantity = request.quantity;
+	product.unit = request.unit;
+	product = await product.save();
+
+	ctx.body = success();
+}

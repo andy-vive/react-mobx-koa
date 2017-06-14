@@ -4,7 +4,7 @@ import {
 	findCategoryByCode,
 	addNewCategory,
 	editCategory,
-} from '../controllers/categoryController';
+} from 'controllers/categoryController';
 
 const router = koaRouter({
 	prefix: '/api/categories',
