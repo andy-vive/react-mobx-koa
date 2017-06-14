@@ -35,5 +35,9 @@ export default (sequelize, DataTypes) => {
     },
   });
 
+  Category.associate = (models) => {
+    Category.hasMany(models.Product, { foreignKey: 'category_id' });
+  };
+  
 	return Category;
 };

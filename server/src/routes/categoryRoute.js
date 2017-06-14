@@ -18,4 +18,4 @@ router.post('/', addNewCategory);
 
 router.put('/:code', editCategory);
 
-module.exports = router;
+module.exports = router; 

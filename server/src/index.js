@@ -4,6 +4,7 @@ import json from 'koa-json';
 import bodyParser from 'koa-bodyparser';
 import cors from 'kcors';
 import router from './routes';
+import models from './models';
 
 const app = new koa();
 const port = 4000;
