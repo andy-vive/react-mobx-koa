@@ -41,6 +41,12 @@ const CategoryItem = ({ category }) => (
 				>
 					Add more products
 				</Link>
+				<Link 
+					to={`/categories/${category.code}/products`}
+					className="btn btn-warning"
+				>
+					Product List
+				</Link>
 			</div>
 		</CardHeader>
 		<CardBody>

@@ -7,7 +7,10 @@ const SideBarMenu = () => (
       <i className="fa fa-dashboard"></i> <span>Dashboard</span>
     </MenuItem>
     <MenuItem index to="/categories">
-      <i className="fa fa-dashboard"></i> <span>Category</span>
+      <i className="fa fa-tags"></i> <span>Category</span>
+    </MenuItem>
+    <MenuItem index to="/products">
+      <i className="fa fa-tag"></i> <span>Product</span>
     </MenuItem>
   </ul>
 );

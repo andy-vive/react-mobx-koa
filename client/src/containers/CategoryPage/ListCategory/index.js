@@ -3,8 +3,10 @@ import { observer, inject } from 'mobx-react';
 import { Link } from 'react-router';
 import { FadeTransition } from 'components/RouteTransition';
 import PageHeader from 'components/PageHeader';
-import { getAllCategories } from './actions';
 import CategoryItems from './CategoryItems';
+
+import { getAllCategories } from './actions';
+
 @inject('categoryStore')
 @observer
 class ListCategory extends Component {
@@ -23,28 +25,24 @@ class ListCategory extends Component {
 				pathname="ListCategory"
 			>
 				<PageHeader
-					title="List Category"
-				/>
+					title="Category List"
+				>
+					<div className="btn-group">
+	    			<Link 
+	    				to="/categories/new"
+    					className="btn btn-success"
+    				>
+    					Create New Category
+  					</Link>
+	    		</div>
+				</PageHeader>
 		    <section className="content">
-		    	<div className="">
-		    		<div className="btn-group">
-		    			<Link 
-		    				to="/categories/new"
-	    					className="btn btn-success"
-	    				>
-	    					Create New Category
-    					</Link>
-		    		</div>
-		    	</div>
-					<div>
-						<CategoryItems 
-							categories={categories}
-						/>
-					</div>
+					<CategoryItems 
+						categories={categories}
+					/>
     		</section>
-    		
 			</FadeTransition>
-		)
+		);
 	}
 }
 export default ListCategory;

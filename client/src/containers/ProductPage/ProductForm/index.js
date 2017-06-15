@@ -17,9 +17,6 @@ export default class ProductForm extends React.Component {
 			>
 				<Column>
 					<ItemEdit
-						field={productForm.$('name')}
-					/>
-					<ItemEdit
 						field={productForm.$('basePrice')}
 					/>
 					<ItemEdit

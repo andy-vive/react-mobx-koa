@@ -1,5 +1,5 @@
 export const productsOptions = [
-  'Pack', 'Tube',
+  'pack', 'tube',
 ];
 
 const fields = [
@@ -25,7 +25,7 @@ const fields = [
 	{
 	  name: 'unit',
 	  label: 'Unit',
-    value: 'Pack',
+    value: 'pack',
     extra: productsOptions,
 	},
 	{

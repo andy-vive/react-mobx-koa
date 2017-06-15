@@ -71,6 +71,24 @@ export default function createRoutes() {
       },
     },
     {
+      path: '/categories/:code/products',
+      name: ROUTES.LIST_PRODUCT,
+      getComponents(nextState, cb) {
+        import('containers/ProductPage/ListProduct')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    },
+    {
+      path: '/products',
+      name: ROUTES.LIST_PRODUCT,
+      getComponents(nextState, cb) {
+        import('containers/ProductPage/ListProduct')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    },
+    {
       path: '*',
       name: ROUTES.NOT_FOUND,
       getComponents(nextState, cb) {

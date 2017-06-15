@@ -1,9 +1,9 @@
 const fields = [
 	{
-	  name: 'name',
-	  label: 'Category Name',
-	  placeholder: 'Category Name',
-	  rules: 'required|string|between:1,50',
+  name: 'name',
+  label: 'Category Name',
+  placeholder: 'Category Name',
+  rules: 'required|string|between:1,50',
 	},
 	{
 	  name: 'description',
@@ -18,8 +18,8 @@ const fields = [
 	  rules: 'required|number',
 	},
 	{
-	  name: 'totalProducts',
-	  label: 'Total Product',
+	  name: 'priceTypeII',
+	  label: 'Price Type II',
 	  placeholder: 'Price for 5 ~ 10 products',
 	  rules: 'required|number',
 	},	

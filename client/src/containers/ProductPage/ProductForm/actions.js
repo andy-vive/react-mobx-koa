@@ -10,6 +10,7 @@ export const createProduct = (categoryCode, product) => {
 	}
 	axios.post(`${productApi.root}`, {
 		product,
+		categoryCode,
 	})
 	.then((res) => {
 		if (res.data.success) {
@@ -18,7 +19,7 @@ export const createProduct = (categoryCode, product) => {
 		}
 	})
 	.catch((err) => {
-		throw err;
+		ToastDanger('Have server error');
 	});
 };
 

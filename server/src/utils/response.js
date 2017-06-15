@@ -1,5 +1,5 @@
-const buildResponse = (status, result, error) => ({
-	status, result, error,
+const buildResponse = (success, result, error) => ({
+	success, result, error,
 });
 
 export const success = (result) =>

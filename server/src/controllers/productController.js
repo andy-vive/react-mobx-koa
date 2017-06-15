@@ -1,6 +1,7 @@
 import { success, failure } from 'utils/response';
 import { generateCode } from 'utils';
 import model from 'models';
+import { ProductUnit } from 'enums/ProductUnit';
 
 const PRODUCT_CODE_LENGTH = 4;
 const PRODUCT_PREFIX_CODE = 'SP';
@@ -38,6 +39,8 @@ export const createProduct = async (ctx, next) => {
 	}
 
 	product.categoryId = category.id;
+	product.unit = ProductUnit[product.unit].code;
+	
 	product = await model.Product.create(product);
 		//update new code
 	const newCode = generateCode(product.id + 7, PRODUCT_PREFIX_CODE, PRODUCT_CODE_LENGTH);
