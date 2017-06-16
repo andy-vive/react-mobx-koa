@@ -26,3 +26,10 @@ FormGroup.propTypes = {
 };
 
 export default FormGroup;
+
+// functional style
+
+export const formGroup = (title, key) => (children) => 
+  <FormGroup title={title} key={key}>
+    { children }
+  </FormGroup>

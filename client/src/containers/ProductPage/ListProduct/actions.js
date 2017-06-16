@@ -1,13 +1,13 @@
-import axios from 'axios';
-import categoryStore from './categoryStore';
-import { productApi } from 'utils/apiRest';
+import { pipeP } from 'ramda';
+import productStore from './productStore';
+import { getProductsApi } from '../apis';
 
-export const getAllProducts = () => {
-	axios.get(productApi.root)
-		.then((res) => {
-			categoryStore.setCategories(res.data.result);
-		})
-		.catch((err) => {
-			throw err;
-		});
-};
+const getProductFromResponse = (res) => 
+	res.data.success ? res.data.result : []
+
+// TODO handle try catch
+export const getProducts = () =>  pipeP(
+	getProductsApi,
+	getProductFromResponse,
+	productStore.setProducts
+)();

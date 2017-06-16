@@ -4,6 +4,10 @@ import { Link } from 'react-router';
 import { FadeTransition } from 'components/RouteTransition';
 import PageHeader from 'components/PageHeader';
 
+import Products from './Products';
+import { getProducts } from './actions';
+
+@inject('productStore')
 @observer
 class ListCategory extends Component {
 	constructor(props) {
@@ -11,9 +15,12 @@ class ListCategory extends Component {
 	}
 
 	componentDidMount() {
+		getProducts();
 	}
 
 	render() {
+		const { productStore } = this.props;
+		const { products } = productStore;
 		return (
 			<FadeTransition
 				pathname="ListProduct"
@@ -22,6 +29,9 @@ class ListCategory extends Component {
 					title="List Product"
 				/>
 		    <section className="content">
+		    	<Products 
+						products={products}
+		    	/>
     		</section>
 			</FadeTransition>
 		)

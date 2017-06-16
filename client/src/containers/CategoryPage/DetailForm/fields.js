@@ -18,8 +18,8 @@ const fields = [
 	  rules: 'required|number',
 	},
 	{
-	  name: 'totalProducts',
-	  label: 'Total Product',
+	  name: 'priceTypeII',
+	  label: 'Price Type II',
 	  placeholder: 'Price for 5 ~ 10 products',
 	  rules: 'required|number',
 	},	

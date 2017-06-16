@@ -1,3 +1,5 @@
+import { flatten } from 'ramda';
+
 export const generateCode = (input, prefix, size) => {
 	if (!input || !prefix || !size) {
 		return;
@@ -22,3 +24,6 @@ export const enumerable = (target) => {
     static: true
   });
 }
+
+export const program = (...list) => (acc) => 
+  R.flatten(list).reduce((acc,fn) => acc.then(fn), Promise.resolve(acc));

@@ -1,5 +1,6 @@
+import { pipeP } from 'ramda';
 import { success, failure } from 'utils/response';
-import { generateCode } from 'utils';
+import { generateCode, program } from 'utils';
 import model from 'models';
 import { ProductUnit } from 'enums/ProductUnit';
 
@@ -7,14 +8,7 @@ const PRODUCT_CODE_LENGTH = 4;
 const PRODUCT_PREFIX_CODE = 'SP';
 
 export const getProductsByCategory = async (ctx, next) => {
-	const products = model.Category.findOne({
-		where: {
-			id: 19
-		},
-		include: [{
-			model: model.Product,
-		}],
-	});
+	const products = await model.Product.findAll();
 	
   ctx.body = success(products);
 }
@@ -51,18 +45,7 @@ export const createProduct = async (ctx, next) => {
 };
 
 export const editProduct = async (ctx, next) => {
-	let product = await model.Product.findOne({
-		where: {
-			code: ctx.params.code,
-		},
-	});
 
-	if (!product) {
-		failure({
-			message: `Can not found product with code: ${ctx.params.code}`,
-		});
-		return;
-	}
 
 	const request = ctx.request.body.product;
 
@@ -73,3 +56,22 @@ export const editProduct = async (ctx, next) => {
 
 	ctx.body = success();
 }
+
+const findProductByCode = (code) => {
+	return model.Product.findOne({
+		where: {
+			code,
+		},
+	});
+}
+
+const checkProductEmpty = (product) => {
+}
+
+const updateToProduct = () => {
+}
+const notFoundProduct = () => (
+	failure({
+			message: `Can not found product with code: ${ctx.params.code}`,
+	})
+);
