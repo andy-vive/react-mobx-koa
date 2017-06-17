@@ -1,7 +1,5 @@
 import axios from 'axios';
 import { productApi } from 'utils/apiRest';
 
-export const getProductsApi = () => {
-	console.log('call')
-	return axios.get(productApi.root);
-}
+export const getProductsApi = (categoryCode = '') => 
+	axios.get(`${productApi.root}?categoryCode=${categoryCode}`);

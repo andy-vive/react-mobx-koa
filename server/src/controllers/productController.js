@@ -1,47 +1,69 @@
-import { pipeP } from 'ramda';
-import { success, failure } from 'utils/response';
+import { pipe, pipeP, ifElse, propOr, isEmpty, always } from 'ramda';
 import { generateCode, program } from 'utils';
-import model from 'models';
+import { success, failure } from 'utils/response';
+
+import models from 'models';
 import { ProductUnit } from 'enums/ProductUnit';
+
+import { findAll, findProductByCode, findProductByCategoryCode, createProduct } from 'repos/productRepo';
+import { findCategoryByCode } from 'repos/categoryRepo';
 
 const PRODUCT_CODE_LENGTH = 4;
 const PRODUCT_PREFIX_CODE = 'SP';
 
+const getParamsFromRequest = (param) => propOr('', param);
+
 export const getProductsByCategory = async (ctx, next) => {
-	const products = await model.Product.findAll();
-	
-  ctx.body = success(products);
+	const products = await pipe(
+		getParamsFromRequest('categoryCode'),
+		pipeP(
+			ifElse(
+				isEmpty,
+				findAll,
+				findProductByCategoryCode
+			),
+			ifElse(
+				isEmpty,
+				failure,
+				success
+			)
+		)
+	)(ctx.request.query);
+  ctx.body = products;
 }
 
-export const createProduct = async (ctx, next) => {
-	let { product, categoryCode } = ctx.request.body;
-	
-	if (!product || !categoryCode) {
-	}
-	// Find Category
-	const category = await model.Category.findOne({
-		where: {
-			code: categoryCode,
-		},
-	});
-
-	if (!category) {
-	  ctx.body = failure({
-				message: `Can not found category with code: ${categoryCode}`,
-		});
-		return;
-	}
-
+const convertRequestToProduct = (category) => (product) => {
 	product.categoryId = category.id;
 	product.unit = ProductUnit[product.unit].code;
-	
-	product = await model.Product.create(product);
-		//update new code
-	const newCode = generateCode(product.id + 7, PRODUCT_PREFIX_CODE, PRODUCT_CODE_LENGTH);
-	product.code = newCode;
-	product = await product.save();
+	return product;
+}
 
-	ctx.body = success(product);
+const updateNewCode = (product) => {
+	product.code = generateCode(product.id + 7, PRODUCT_PREFIX_CODE, PRODUCT_CODE_LENGTH);
+	return product;
+}
+
+export const addProduct = async (ctx, next) => {
+	const category = await pipe(
+		getParamsFromRequest('categoryCode'),
+		ifElse(
+			isEmpty,
+			always(null),
+			findCategoryByCode
+		)
+	)(ctx.request.body);
+
+	const product = await pipe(
+		getParamsFromRequest('product'),
+		convertRequestToProduct(category),
+		pipeP(
+			createProduct,
+			updateNewCode,
+			(p) => p.save(),
+			success
+		)
+	)(ctx.request.body);
+	ctx.body = product;
 };
 
 export const editProduct = async (ctx, next) => {
@@ -57,13 +79,6 @@ export const editProduct = async (ctx, next) => {
 	ctx.body = success();
 }
 
-const findProductByCode = (code) => {
-	return model.Product.findOne({
-		where: {
-			code,
-		},
-	});
-}
 
 const checkProductEmpty = (product) => {
 }

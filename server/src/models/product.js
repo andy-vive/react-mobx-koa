@@ -40,11 +40,12 @@ const ProductModel = (sequelize, DataTypes) => {
       }
     }
 	});
-	return Product;
 
 	Product.associate = (models) => {
     Product.belongsTo(models.Category, { foreignKey: 'category_id' });
 	};
+
+	return Product;
 }; 
 
 export default ProductModel;

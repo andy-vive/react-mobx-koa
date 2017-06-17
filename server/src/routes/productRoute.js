@@ -1,7 +1,7 @@
 import koaRouter from 'koa-router';
 import { 
 	getProductsByCategory,
-	createProduct
+	addProduct,
 } from 'controllers/productController';
 
 const router = koaRouter({
@@ -10,6 +10,6 @@ const router = koaRouter({
 
 router.get('/', getProductsByCategory);
 
-router.post('/', createProduct);
+router.post('/', addProduct);
 
 module.exports = router; 

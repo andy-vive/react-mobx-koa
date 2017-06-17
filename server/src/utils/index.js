@@ -26,4 +26,4 @@ export const enumerable = (target) => {
 }
 
 export const program = (...list) => (acc) => 
-  R.flatten(list).reduce((acc,fn) => acc.then(fn), Promise.resolve(acc));
+  flatten(list).reduce((acc,fn) => acc.then(fn), Promise.resolve(acc));
