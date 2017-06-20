@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { pipe, pipeP, curry, tryCatch, path, ifElse, isEmpty } from 'ramda';
+import { pipe, pipeP, curry, tryCatch, path, ifElse, isEmpty, defaultTo } from 'ramda';
 import { Either } from 'ramda-fantasy';
 import { productApi } from 'utils/apiRest';
 
@@ -39,28 +39,26 @@ const checkQuantity = (params) =>
 		() => Either.Right(params)
 	)(params);
 
-const callCreateProductApi = ({ categoryCode, product }) => 
-	curry(createProductApi)(categoryCode)(product)
-		.then((res) => Either.Right(res.data.result))
-		.catch((err) => Either.Left(new Error('Create Product fail')))
-
 const completeCreateProduct = () => 
 	pipe(
 		() => formStore.reset(),
 		() => ToastSuccess('Create product success')
-	)();
+	)('');
+
+const callCreateProductApi = ({ categoryCode, product }) => pipeP(
+	() => curry(createProductApi)(categoryCode)(product)
+		.then((res) => Either.Right(res.data.result))
+		.catch((err) => Either.Left(new Error('Create Product fail'))),
+	Either.either(showError, completeCreateProduct),
+)({ categoryCode, product})
 
 const eitherErrorOrCreateProduct = Either.either(showError, callCreateProductApi);
 
 export const createProduct = (categoryCode, product) => {
 	const params = { categoryCode, product };
-	pipeP(
-		() => eitherErrorOrCreateProduct(
-			checkCategoryCode(params)
-				.chain(checkProduct)
-				.chain(checkBasePrice)
-				.chain(checkQuantity)
-		),
-		completeCreateProduct
-	)()
+	eitherErrorOrCreateProduct(
+		checkCategoryCode(params)
+			.chain(checkProduct)
+			.chain(checkQuantity)
+	);
 }
