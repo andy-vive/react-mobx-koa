@@ -7,6 +7,8 @@ import PageHeader from 'components/PageHeader';
 import Products from './Products';
 import { getProducts } from './actions';
 
+import FilterForm from './FilterForm';
+
 @inject('productStore')
 @observer
 class ListCategory extends Component {
@@ -30,6 +32,7 @@ class ListCategory extends Component {
 					title="List Product"
 				/>
 		    <section className="content">
+		    	<FilterForm />
 		    	<Products 
 						products={products}
 		    	/>

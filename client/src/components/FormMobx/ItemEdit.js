@@ -2,11 +2,12 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import FormGroup from 'components/FormGroup';
 import DropdownListField from './DropdownListField';
+import ComboboxField from './ComboboxField';
 import { itemType } from './utils';
 
 // TODO:
 // Make Item edit workable with select, radio button, or checkbox
-const ItemEdit = observer(({ field, type = itemType.TEXT, placeholder = null, editing }) => {
+const ItemEdit = observer(({ field, type = itemType.TEXT, placeholder = null, editing, onChange }) => {
 
 	const renderItem = () => {
 		let Item = (<span></span>);
@@ -23,6 +24,8 @@ const ItemEdit = observer(({ field, type = itemType.TEXT, placeholder = null, ed
 		case itemType.DROPDOWNLIST:
 			Item = <DropdownListField field={field} />
 			break;
+		case itemType.COMBOBOX:
+			Item = <ComboboxField field={field} onChange={onChange} />
 		default:
 			break;
 		};

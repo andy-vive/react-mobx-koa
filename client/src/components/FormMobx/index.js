@@ -28,7 +28,7 @@ export default class FormEdit extends React.Component {
     );
     const childrenWithProps = React.Children.map(this.props.children,
       (child) => React.cloneElement(child, {
-        editing: this.state.isEditing || this.props.mode === mode.CREATE,
+        editing: this.state.isEditing || [mode.CREATE, mode.FILTER].includes(this.props.mode),
         form,
       })
     );
@@ -80,7 +80,23 @@ export default class FormEdit extends React.Component {
                 Cancel
               </button>              
             </div>
-            );
+          );
+      } else if (this.props.mode === mode.FILTER) {
+        return (
+          <div>
+            <button
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                this.setState({ isEditing: false, })
+                this.props.onSubmit(form.values());
+              }}
+              className="btn btn-success"
+            >
+              Apply
+            </button>
+          </div>
+        );
       } else {
        return (
           <span />

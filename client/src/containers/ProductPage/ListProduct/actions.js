@@ -1,15 +1,15 @@
-import { pipe, pipeP, ifElse, always, prop, propOr } from 'ramda';
+import { pipeP } from 'ramda';
+import { getResultsFromResponse } from 'utils';
 import productStore from './productStore';
 import { getProductsApi } from '../apis';
-
-const getProductFromResponse = pipe(
-	prop('data'),
-	propOr([], 'result')
-);
 
 // TODO handle try catch
 export const getProducts = (categoryCode) =>  pipeP(
 	getProductsApi,
-	getProductFromResponse,
+	getResultsFromResponse,
 	productStore.setProducts
 )(categoryCode);
+
+export const filterFormSubmit = (value) => {
+	console.log(value);
+}

@@ -4,9 +4,12 @@ import { pipe } from 'ramda';
 import moment from 'moment';
 import Card, { CardHeader, CardBody } from 'components/Card';
 import { formGroup } from 'components/FormGroup';
+import { formatVND } from 'utils';
 
-const basePrice = (product) => <p>{product.basePrice}</p>
-const quantity = (product) => <p>{product.quantity + '' + product.unit}</p>
+
+
+const basePrice = (product) => <p>{ formatVND(product.basePrice) }</p>
+const quantity = (product) => <p>{`${product.quantity} ${product.unit}`}</p>
 const importDate = (product) => <p>{ moment(product.createAt).format("DD/MM/YYYY")}</p>
 const content = (product) => [
 	pipe(basePrice, formGroup("Base Price", `basePrice-${product.code}`))(product),

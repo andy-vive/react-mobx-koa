@@ -5,7 +5,7 @@ import { FadeTransition } from 'components/RouteTransition';
 import PageHeader from 'components/PageHeader';
 import CategoryItems from './CategoryItems';
 
-import { getAllCategories } from './actions';
+import { getCategories } from './actions';
 
 @inject('categoryStore')
 @observer
@@ -15,7 +15,7 @@ class ListCategory extends Component {
 	}
 
 	componentDidMount() {
-		getAllCategories();
+		getCategories();
 	}
 
 	render() {
