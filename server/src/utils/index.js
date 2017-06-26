@@ -1,4 +1,4 @@
-import { flatten } from 'ramda';
+import { flatten, propOr } from 'ramda';
 
 export const generateCode = (input, prefix, size) => {
 	if (!input || !prefix || !size) {
@@ -27,3 +27,5 @@ export const enumerable = (target) => {
 
 export const program = (...list) => (acc) => 
   flatten(list).reduce((acc,fn) => acc.then(fn), Promise.resolve(acc));
+
+export const getParamsFromRequest = (param) => propOr('', param);

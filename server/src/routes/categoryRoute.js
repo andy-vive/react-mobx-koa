@@ -1,7 +1,7 @@
 import koaRouter from 'koa-router';
 import { 
 	getAllCategories,
-	findCategoryByCode,
+	getCategory,
 	addNewCategory,
 	editCategory,
 } from 'controllers/categoryController';
@@ -12,7 +12,7 @@ const router = koaRouter({
 
 router.get('/', getAllCategories);
 
-router.get('/:code', findCategoryByCode);
+router.get('/:code', getCategory);
 
 router.post('/', addNewCategory);
 

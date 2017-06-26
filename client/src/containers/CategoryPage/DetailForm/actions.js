@@ -66,24 +66,6 @@ export const getCategory = (categoryCode) => {
 	eitherShowErrorOrDoingGetCategory(
 		checkCategoryCode(categoryCode)
 	);
-
-
-	if (!categoryCode) {
-		console.error('Empty category code');
-		return;
-	}
-	getCategoryApi(categoryCode)
-		.then((res) => {
-			const { result } = res.data;
-			if (result) {
-				formStore.set('value',{
-					...result
-				});
-			}
-		})
-		.catch((err) => {
-			throw err;
-		});
 };
 
 const completeUpdateCategory = pipe(

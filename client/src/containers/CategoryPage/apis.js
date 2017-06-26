@@ -1,11 +1,12 @@
 import axios from 'axios';
+import queryString from 'query-string';
 const root = '/api/categories';
 const apiRest = {
 	root: root,
 };
 
-export const getCategoriesApi = (categoryCode = '') => 
-	axios.get(`${apiRest.root}?categoryCode=${categoryCode}`);
+export const getCategoriesApi = (params = {}) => 
+	axios.get(`${apiRest.root}?${queryString.stringify(params)}`);
 
 export const getCategoryApi = (categoryCode) => 
 	axios.get(`${apiRest.root}/${categoryCode}`);
