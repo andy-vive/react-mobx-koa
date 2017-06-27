@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { Combobox } from 'react-widgets';
 import 'react-widgets/lib/less/react-widgets.less'
 
-export default observer(({ field, onChange }) => {
+const Comp = ({ field, onChange, onSelect }) => {
 	const handleChange = (e) => {
 		field.sync(e);
 		onChange(e);
@@ -14,7 +14,15 @@ export default observer(({ field, onChange }) => {
 	  	textField='label'
 	    value={field.value}
 	    onChange={handleChange}
+	    onSelect={onSelect}
 	    data={field.extra}
 	  />
-	);
-});
+	);	
+};
+
+Comp.defaultProps = {
+	onChange: () => {},
+	onSelect: () => {},
+};
+
+export default observer(Comp);

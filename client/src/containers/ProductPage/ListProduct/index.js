@@ -18,7 +18,7 @@ class ListCategory extends Component {
 
 	componentDidMount() {
 		const { code } = this.props.params;
-		getProducts(code);
+		getProducts({ categoryCode: code});
 	}
 
 	render() {

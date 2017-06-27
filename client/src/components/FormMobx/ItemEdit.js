@@ -7,7 +7,7 @@ import { itemType } from './utils';
 
 // TODO:
 // Make Item edit workable with select, radio button, or checkbox
-const ItemEdit = observer(({ field, type = itemType.TEXT, placeholder = null, editing, onChange }) => {
+const ItemEdit = observer(({ field, type = itemType.TEXT, placeholder = null, editing, onChange, onSelect }) => {
 
 	const renderItem = () => {
 		let Item = (<span></span>);
@@ -25,7 +25,13 @@ const ItemEdit = observer(({ field, type = itemType.TEXT, placeholder = null, ed
 			Item = <DropdownListField field={field} />
 			break;
 		case itemType.COMBOBOX:
-			Item = <ComboboxField field={field} onChange={onChange} />
+			Item = (
+				<ComboboxField 
+					field={field} 
+					onChange={onChange}
+					onSelect={onSelect}
+				/>
+			);
 		default:
 			break;
 		};

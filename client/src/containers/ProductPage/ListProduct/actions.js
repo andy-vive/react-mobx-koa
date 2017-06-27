@@ -1,4 +1,4 @@
-import { pipeP } from 'ramda';
+import { pipeP, pipe, curry, ifElse, useWith, path, set, lensProp } from 'ramda';
 import { getResultsFromResponse } from 'utils';
 
 import { getCategoriesApi } from 'containers/CategoryPage/apis';
@@ -7,15 +7,11 @@ import filterStore from './FilterForm/filterStore';
 import { getProductsApi } from '../apis';
 
 // TODO handle try catch
-export const getProducts = (categoryCode) =>  pipeP(
+export const getProducts = ({ categoryCode }) =>  pipeP(
 	getProductsApi,
 	getResultsFromResponse,
 	productStore.setProducts
-)(categoryCode);
-
-export const filterFormSubmit = (value) => {
-	console.log(value);
-}
+)({ categoryCode });
 
 const convertFromResultToDataList = (result) => 
 	result.map((r) => ({
@@ -32,4 +28,27 @@ export const changeCategory = (value) => {
 			category: result
 		})
 	)({ name: value });
+};
+
+const checkValueThenSetToResult = curry((propName, newValue, target) => ifElse(
+	() => !newValue,
+	() => target,
+	() => set(lensProp(propName), newValue, target)
+)());
+
+const getCategoryCodeIfExist = curry(useWith(
+	(newValue, target) => checkValueThenSetToResult('categoryCode')(newValue, target),
+	[
+		path(['category', 'key'])
+	]
+));
+
+
+export const applyFilter = (formValue) => {
+	console.log(getCategoryCodeIfExist(formValue, {}))
+	pipe(
+		getCategoryCodeIfExist,
+		getProducts
+	)(formValue, {});	
 }
+
