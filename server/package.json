@@ -8,7 +8,7 @@
     "dev:start": "nodemon --ignore build --exec babel-node src",
     "prod:build": "rimraf build && babel src -d build --ignore __test__,.test.js",
     "prod:start": "cross-env NODE_ENV=production pm2 start build --name t-server && pm2 logs",
-    "prod:stop": "pm2 delete tblog-server",
+    "prod:stop": "pm2 delete t-server",
     "db:migrate": "sequelize db:migrate",
     "db:rollback": "sequelize db:migrate:undo",
     "create:migration": "sequelize migration:create"
